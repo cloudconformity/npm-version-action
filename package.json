@@ -46,6 +46,6 @@
   "dependencies": {
     "@actions/core": "^1.2.3",
     "@actions/github": "^2.1.1",
-    "winston": "^3.2.1"
+    "winston": "^3.4.0"
   }
 }
