@@ -1,8 +1,8 @@
-name: "Hello World"
-description: "Greet someone and record the time"
+name: "NPM Version Action"
+description: "Version the repo based on the commit messages and push the updated tags."
 outputs:
   version:
-    description: "The time we greeted you"
+    description: "Th new version number"
 runs:
-  using: "node12"
+  using: "node16"
   main: "dist/index.js"
