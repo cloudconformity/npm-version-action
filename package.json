@@ -10,24 +10,25 @@
     "lint": "eslint \"src/**/*.js\" \"test/**/*.js\" --ignore-path .gitignore --no-error-on-unmatched-pattern",
     "lint:fix": "npm run lint -- --fix",
     "build": "ncc build src/index.js",
-    "version": "npm run build && git add dist"
+    "version": "npm run build && git add dist",
+    "prepare": "husky install"
   },
   "repository": "github:sam-doomguy/npm-version-action",
   "author": "Sam M. R.",
   "license": "MIT",
   "devDependencies": {
-    "@types/jest": "^25.2.1",
+    "@types/jest": "^29.5.2",
     "@zeit/ncc": "^0.22.0",
-    "eslint": "^7.11.0",
-    "eslint-config-prettier": "^6.10.1",
-    "eslint-plugin-jest": "^23.8.2",
+    "eslint": "^8.43.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-jest": "^27.2.2",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^3.1.2",
-    "eslint-plugin-security": "^1.4.0",
-    "husky": "^4.2.3",
-    "jest": "^25.2.7",
-    "lint-staged": "^10.1.1",
-    "prettier": "^2.0.2"
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-security": "^1.7.1",
+    "husky": "^8.0.0",
+    "jest": "^29.5.0",
+    "lint-staged": "^13.2.2",
+    "prettier": "^2.8.8"
   },
   "engines": {
     "node": "^16",
@@ -37,12 +38,6 @@
     "**/*.js": [
       "eslint --fix"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "npm run check"
-    }
   },
   "dependencies": {
     "@actions/core": "^1.10.0",
