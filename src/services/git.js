@@ -44,7 +44,7 @@ const setGitConfig = async (name, value) => {
  * @return {Promise<string>} Created version, e.g. v1.2.3
  */
 const createVersion = async (versionType = "patch") => {
-	const { stdout, stderr } = await exec(`npm version ${versionType}`);
+	const { stdout, stderr } = await exec(`npm version ${versionType} -m "%s\n\n[skip actions]"`);
 	logExecResults(stdout, stderr);
 	const version = stdout
 		.split("\n")

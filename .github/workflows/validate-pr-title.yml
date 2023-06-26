@@ -1,0 +1,31 @@
+name: Validate PR Title
+on:
+  pull_request:
+    types: ["opened", "edited", "reopened", "synchronize"]
+
+jobs:
+  commitlint:
+    runs-on: >-
+      ${{ fromJSON(format('{{"cloudconformity": "ubuntu-latest", "v1-cspm-conformity": "ebf-pod-ubuntu-2004-slim@{0}-commitlint"}}', github.run_id))[github.repository_owner] }}
+    env:
+      ARTIFACTORY_TOKEN: ${{ secrets.ARTIFACTORY_TOKEN }}
+      ARTIFACTORY_TOKEN_EMAIL: ${{ secrets.ARTIFACTORY_TOKEN_EMAIL }}
+      ARTIFACTORY_URL: ${{ secrets.ARTIFACTORY_URL_VIRTUAL }}
+    steps:
+      - uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8 # refers to actions/checkout@v3.1.0
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@8c91899e586c5b171469028077307d293428b516 # refers to actions/setup-node@v3.5.1
+        with:
+          node-version: 16
+      - run: npm i npm@8 -g
+      - run: npm config set registry https://$ARTIFACTORY_URL
+      - run: npm config set replace-registry-host npm.pkg.github.com
+      - run: npm config set //$ARTIFACTORY_URL:_auth "$(echo -n $ARTIFACTORY_TOKEN_EMAIL:$ARTIFACTORY_TOKEN | base64 -w 0)"
+      - run: npm config set //$ARTIFACTORY_URL:email "$ARTIFACTORY_TOKEN_EMAIL"
+      - run: npm config set //$ARTIFACTORY_URL:always-auth true
+      - run: npm install --ignore-scripts
+      - uses: JulienKode/pull-request-name-linter-action@2d32d4e7eb34ae4ff9c3c3ba0f5eaadb27bb0f2d # v0.2.0 commit hash, refers to JulienKode/pull-request-name-linter-action@0.2.0
+        with:
+          configuration-path: .commitlintrc.js

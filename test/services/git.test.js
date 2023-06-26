@@ -49,7 +49,7 @@ describe("git", () => {
 
 				const version = await createVersion();
 				expect(childProcess.exec).toHaveBeenCalledTimes(1);
-				expect(childProcess.exec.mock.calls[0][0]).toBe("npm version patch");
+				expect(childProcess.exec.mock.calls[0][0]).toMatch(/^npm version patch/);
 				expect(version).toBe("v1.0.0");
 			});
 		});
