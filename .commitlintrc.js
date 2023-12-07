@@ -1,3 +1,3 @@
 module.exports = {
-	extends: ["@cloudconformity/commitlint-config-conformity"]
+	extends: ["@conformity/commitlint-config-conformity"]
 };
