@@ -17,7 +17,7 @@
   "author": "Sam M. R.",
   "license": "MIT",
   "devDependencies": {
-    "@cloudconformity/commitlint-config-conformity": "^1.1.19",
+    "@conformity/commitlint-config-conformity": "^1.2.3",
     "@types/jest": "^29.5.2",
     "@zeit/ncc": "^0.22.0",
     "commitlint-cli": "^1.1.3",
